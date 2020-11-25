@@ -8,8 +8,11 @@ import {
   View,
   Text,
   StatusBar,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
+
+import {Actions} from 'react-native-router-flux'
 export default class HomePage extends Component{
     constructor(){
       super()
@@ -50,14 +53,21 @@ export default class HomePage extends Component{
 
        getNineView(){
        return   <View style={{flexDirection:"row",flexWrap:"wrap"}}> 
-     {this.state.list.map(item=>{
-             return <View style={{width:"33.33%",alignItems:"center",justifyContent:"center",marginTop:10}}>
+             {this.state.list.map(item=>{
+             return <TouchableHighlight underlayColor="#ffffff" activeOpacity={1} style={{width:"33.33%",alignItems:"center",justifyContent:"center",marginTop:10}} onPress={this.onItemClick.bind(this)}>
+                <View >
               <Image source={item.imgUrl} style={{width:60,height:60}}/>
               <Text style={{marginTop:5}}>{item.name}</Text>
-             </View>      
+             </View>     
+             </TouchableHighlight> 
          })}
      </View> 
 
+       }
+
+       //跳转到电影列表
+       onItemClick(){
+        Actions.movieList();
        }
 
 }
